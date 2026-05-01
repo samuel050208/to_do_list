@@ -1,13 +1,32 @@
 import tkinter as tk
 from tkinter import *
+import os, sys
+
+def resource_path(filename):
+    if hasattr(sys, "_MEIPASS"):
+        return os.path.join(sys._MEIPASS, filename)
+    return os.path.join(os.path.abspath("."), filename)
 
 class load_window:
     def __init__(self, addButton_callback, clearButton_callback, remButton_callback, exit_callback):
         print("main_window: Loading window...")
+
+        # Window
         self.window = tk.Tk()
         self.window.title("ToDoList")
-        self.window.geometry("490x240")
+        w = 490
+        h = 250
+        screen_w = self.window.winfo_screenwidth()
+        screen_h = self.window.winfo_screenheight()
+        x = (screen_w // 2) - (w // 2)
+        y = (screen_h // 2) - (h // 2)
+        self.window.geometry(f"{w}x{h}+{x}+{y}")
 
+        # Icon
+        self.icon = tk.PhotoImage(file = resource_path("ui/icon.png"))
+        self.window.iconphoto(True, self.icon)
+
+        # Menubar
         self.menu = tk.Menu(self.window)
         self.actionmenu = tk.Menu(self.menu, tearoff = 0)
         self.menu.add_cascade(label = "Menu", menu = self.actionmenu)
@@ -16,9 +35,8 @@ class load_window:
 
         self.aboutmenu = tk.Menu(self.window, tearoff = 0)
         self.menu.add_cascade(label = "About", menu = self.aboutmenu)
-        self.aboutmenu.add_command(label = "v1.1.0")
+        self.aboutmenu.add_command(label = "v2.0.0")
         
-
         # Frame
         self.frameList = tk.Frame(self.window, borderwidth = 2, relief = "sunken", width = 250, height = 165)
         self.frameList.place(x = 100, y = 40)

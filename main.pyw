@@ -1,5 +1,5 @@
 from ui.main_window import load_window
-from data.manager import data_manager
+from data.manager import DataManager
 
 
 if __name__ == "__main__":
@@ -37,7 +37,7 @@ if __name__ == "__main__":
 
     print("main: Loading...")
     window = load_window(addButton_callback, clearButton_callback, remButton_callback, exit_callback)
-    manager = data_manager()
+    manager = DataManager()
     loader() 
 
     window.load_ui()
